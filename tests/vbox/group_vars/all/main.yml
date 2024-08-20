@@ -1,0 +1,27 @@
+---
+#
+## ansible-role-consul
+#
+consul_master_group: "consul_server"
+consul_master: true
+#
+consul_dns_port: "8600"
+consul_http_port: "8500"
+consul_https_port: "8501"    # default 8501
+consul_grpc_port: "8502"     # default 8502
+consul_grpc_tls_port: "8503" # default 8503
+consul_rpc_port: "8300"
+consul_serf_lan_port: "8301"
+consul_serf_wan_port: "8302"
+#
+## ansible-role-k3s
+#
+k3s_release_version: v1.29.7+k3s1
+k3s_build_cluster: false
+k3s_become: true
+#
+## ansible-role-node_exporter
+#
+node_exporter_version: '1.8.0'
+node_exporter_arch: 'amd64'
+node_exporter_port: 9100

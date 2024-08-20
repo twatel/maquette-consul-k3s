@@ -1,0 +1,45 @@
+hosts = [
+    {
+      :name => "consul-01",
+      :ip => "192.168.56.101",
+      :cpu => "1",
+      :memory => "1024",
+      :image => "debian/bookworm64"
+    },
+    {
+      :name => "testing-k3s-server",
+      :ip => "192.168.56.102",
+      :cpu => "2",
+      :memory => "2048",
+      :image => "debian/bookworm64"
+    }
+]
+
+Vagrant.configure("2") do |config|
+  hosts.each do |host|
+    config.vm.define host[:name] do |define|
+      define.ssh.insert_key = false
+      config.vm.box = host[:image]
+      define.vm.hostname = host[:name]
+      define.vm.network :private_network, ip: host[:ip]
+
+      define.vm.provider :virtualbox do |v|
+        v.cpus = host[:cpu]
+        v.memory = host[:memory]
+        v.name = host[:name]
+      end
+
+    if host[:name] == hosts.last[:name]
+        define.vm.provision :ansible do |ansible|
+            ansible.host_key_checking = false
+            ansible.limit = "all"
+            ansible.playbook = "tests.yml"
+            ansible.inventory_path = "hosts"
+            # to enable ansible playbook verbose mode, uncomment the line below
+            # ansible.raw_arguments  = ["-v"]
+        end
+    end
+
+    end
+  end
+end

@@ -1,0 +1,22 @@
+---
+# collections:
+#   - name: community.general
+#     version: 9.2.0
+#   - name: community.crypto
+
+roles:
+  - src: https://codeberg.org/twatel/system-base.git
+    scm: git
+    version: 1.0.4
+  - src: https://github.com/PyratLabs/ansible-role-k3s.git
+    scm: git
+    version: v3.4.4
+  - src: https://github.com/geerlingguy/ansible-role-node_exporter.git
+    scm: git
+    version: 2.1.0
+  - src: https://codeberg.org/twatel/ansible-role-consul.git
+    scm: git
+    version: develop
+  - src: https://codeberg.org/twatel/ansible-role-consul-service.git
+    scm: git
+    version: develop

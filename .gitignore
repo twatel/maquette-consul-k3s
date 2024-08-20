@@ -1,0 +1,16 @@
+.direnv
+.vscode
+.vagrant
+.terraform
+*.tfstate
+.env.local
+.env.secret
+.env.secrets
+#
+inventories
+#
+ansible-role-consul
+ansible-role-consul-service
+ansible-role-node_exporter
+ansible-role-nodejs
+system-base

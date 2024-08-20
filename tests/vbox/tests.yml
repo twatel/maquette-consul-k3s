@@ -1,0 +1,47 @@
+---
+# - name: Testing ansible-role-kubernetes apply
+#   hosts: testing-k3s-server
+#   gather_facts: true
+#   become: true
+
+#   pre_tasks:   
+#     - name: Ensure timezone
+#       ansible.builtin.command: "timedatectl set-timezone Europe/Paris"
+#       changed_when: false
+
+#     - name: Ensure cgroup
+#       ansible.builtin.lineinfile:
+#         path: "/etc/default/grub"
+#         regexp: 'GRUB_CMDLINE_LINUX_DEFAULT'
+#         line: 'GRUB_CMDLINE_LINUX_DEFAULT="net.ifnames=0 biosdevname=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory systemd.unified_cgroup_hierarchy=0"'
+#         state: present
+#       register: enable_cgroup
+
+#     - name: Update Grub
+#       ansible.builtin.command: "update-grub"
+#       when: enable_cgroup is changed
+
+#     - name: Reboot machine after cgroup and grub update
+#       ansible.builtin.reboot:
+#         reboot_timeout: 3600
+#       when: enable_cgroup is changed
+
+#   roles:
+#     - system-base
+#     - ansible-role-k3s
+#     - ansible-role-node_exporter
+
+- name: Testing ansible-role-consul apply
+  hosts: consul_server
+  gather_facts: true
+  become: true
+
+  pre_tasks:
+    - name: Ensure timezone
+      command: "timedatectl set-timezone Europe/Paris"
+      changed_when: false
+
+  roles:
+    - system-base
+    - ansible-role-consul
+    - ansible-role-node_exporter

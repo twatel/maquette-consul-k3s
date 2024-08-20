@@ -1,0 +1,15 @@
+consul-01 ansible_host=192.168.56.101 ansible_user=vagrant
+testing-k3s-server ansible_host=192.168.56.102 ansible_user=vagrant
+
+[vagrant]
+consul-01
+testing-k3s-server
+
+[consul_server]
+consul-01
+
+[server]
+testing-k3s-server
+
+[agent]
+testing-k3s-server
