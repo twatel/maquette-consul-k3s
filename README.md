@@ -1,0 +1,1 @@
+# maquette-consul-k3s
